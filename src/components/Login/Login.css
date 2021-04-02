@@ -1,0 +1,22 @@
+.App{
+ 
+    margin: 10px 500px;
+    
+}
+.login-form  input {
+display: block;
+margin-top: 20px;
+padding: 5px;
+border: 1px solid tomato;
+border-radius: 5px;
+width: 300px;
+
+}
+.sign-form{
+    margin-top: 30px;
+    margin-left: 60px;
+}
+
+.sign-in{
+    background-color: rgb(233, 94, 39);
+}
