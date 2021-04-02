@@ -29,39 +29,45 @@ function App() {
         <div className="Header">
 
           <Router>
-         
-          <Header></Header>
+            <Header />
             <Switch>
-              {/* <Route exact path="/">
+              <Route exact path="/">
                 <Home />
-              </Route> */}
+              </Route>
 
               <Route path="/addProducts">
                 <AddProducts />
               </Route>
-              <PrivateRoute path="/orders">
+
+              {/* <Route path="/orders/:product_id"> */}
+              <Route path="/checkout/:_id">
                 <Orders />
-              </PrivateRoute>
+              </Route>
+
               <Route path="/manager">
                 <Manager />
               </Route>
               <Route path="/login">
+
                 <Login></Login>
               </Route>
               <Route path="/admin">
                 <Admin></Admin>
               </Route>
+
               <Route path="/deals">
                 <Deals />
               </Route>
+
               <Route path="/checkout">
                 <Checkout />
               </Route>
-                
+
               <Route path="/home">
                 <Home></Home>
               </Route>
               <Route path="*">
+
                 <NotFound></NotFound>
               </Route>
 

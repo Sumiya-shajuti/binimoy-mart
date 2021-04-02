@@ -1,66 +1,87 @@
-// import React from 'react';
-// import { useForm } from 'react-hook-form';
-// import { useContext } from 'react';
-// import { UserContext } from '../../App';
+
+// import React, { useEffect, useState } from 'react';
+// import { useParams } from 'react-router-dom';
+// import { useForm } from "react-hook-form";
 
 
 // const Checkout = () => {
-//     const { register, handleSubmit, watch, errors } = useForm();
-//     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+//     const { register, handleSubmit, watch, errors,name } = useForm();
+//     const { _id } = useParams();
+//     const [product, setProducts] = useState([]);
+// const items =product.find( td => td._id==_id)
+//     console.log(items)
+//     useEffect(() => {
+//         fetch('http://localhost:5055/products')
+//         .then(res => res.json())
+//         .then(data => setProducts(data))
+//     }, [])
+
 //     const onSubmit = data => {
-      
-//         const orderDetails = { ...loggedInUser, shipment: data, orderTime: new Date() };
-
-//         fetch('http://localhost:5050/addOrder', {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify(orderDetails)
-//         })
-//             .then(res => res.json())
-//             .then(data => {
-//                 if (data) {
-//                     // processOrder();
-//                     alert('your order placed successfully');
-//                 }
-//             })
-
-//     };
-
-//     console.log(watch("example")); // watch input value by passing the name of it
-
+//         const ordered = {
+//             name: data.name,
+//             price:data.price,
+//             weight:data.weight
+          
+//         };
+//     }
+   
 //     return (
-//         <form className="placed-form" onSubmit={handleSubmit(onSubmit)}>
-//             <input name="name" defaultValue={loggedInUser.name} ref={register({ required: true })} placeholder="Your Name" />
-//             {errors.name && <span className="error">Name is required</span>}
+//         <div>
+        
+//             <h1>Confirm your order</h1>
+//             <form onSubmit={handleSubmit(onSubmit)}></form>
+            
+//             <img style={{ height: '300px' }} src={product.imageURL} alt="" />
+//             <h1>{name}</h1>
+//             <form action="/checkout" class="inline">
+//                         <button className="main-button float-left submit-button"
+//                             onClick={() =>onSubmit( product)}
+//                         >Place Order</button>
+//                     </form>
 
-//             <input name="email" defaultValue={loggedInUser.email} ref={register({ required: true })} placeholder="Your Email" />
-//             {errors.email && <span className="error">Email is required</span>}
 
-//             <input name="address" ref={register({ required: true })} placeholder="Your Address" />
-//             {errors.address && <span className="error">Address is required</span>}
-
-//             <input name="phone" ref={register({ required: true })} placeholder="Your Phone Number" />
-//             {errors.phone && <span className="error">Phone Number is required</span>}
-
-//             <input type="submit" />
-//         </form>
+//         </div>
 //     );
+
+
+
+
 // };
 
-
-
 // export default Checkout;
-import React from 'react';
+
+import React, { useContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router';
+import { UserContext } from '../../App';
 
 const Checkout = () => {
-    return (
-       
+  const { _id } = useParams();
+    const [ordered, setOrdered] = useState([]);
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 
-                
+    useEffect(() => {
+        fetch(`http://localhost:5050/products/${_id}=`+loggedInUser.email, {
+            method: 'GET',
+            headers: { 
+                'Content-Type': 'application/json',
+                authorization: `Bearer ${sessionStorage.getItem('token')}`
+            }
+        })
+        .then(res => res.json())
+        .then(data => setOrdered(data));
+    }, [])
+    const {name,price} =ordered;
+    const user ={
+      productName :name,
+      productPrice:price
+    }
+
+    return (
         <div>
-          <h1>hello!!!!</h1>  
+            <h3>You have: {ordered.length}1 ordered product</h3>
+                       {
+                ordered.map(item => <li key={item._id}>{item.name} from: {(new Date(item.checkIn).toDateString('dd/MM/yyyy'))} to: {(new Date(item.checkOut).toDateString('dd/MM/yyyy'))}</li>)
+            }
         </div>
     );
 };

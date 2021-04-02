@@ -57,7 +57,7 @@ const AddProducts = () => {
             <div class="sidenav">
                 <a href="#">Add Product</a>
                 <br />
-                <a href="./manage">Manage History</a>
+                <a href="./manager">Manage History</a>
                 <br />
                 <a href="#">Contact</a>
             </div>

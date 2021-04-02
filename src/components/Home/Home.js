@@ -15,10 +15,11 @@ const Home = () => {
     return (
         <div className="row-3">
             {
-                products.map(product =><Product product={product}></Product>)
+                products.map(product =><Product key={product} product={product}></Product>)
             }
         </div>
     );
 };
+// products.map(product =><Product key={product} product={product}></Product>)
 
 export default Home;
