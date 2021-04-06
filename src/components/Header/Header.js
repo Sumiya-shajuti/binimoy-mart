@@ -20,11 +20,12 @@ const Header = () => {
                 <a href="/login">Login</a>
                 <a href="/deals">Deals</a>
                 <a href="/addProducts">Admin</a>
-                <Form inline>
+               
+                 {/* <Form inline>
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                    <Button variant="outline-primary">Search</Button>
-                </Form>
-                {/* <a href="/addProducts">AddProducts</a> */}
+                     <Button variant="outline-danger">Search</Button>
+               </Form> */}
+      
 
             </nav>
         </div>

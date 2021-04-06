@@ -1,90 +1,57 @@
 
-// import React, { useEffect, useState } from 'react';
-// import { useParams } from 'react-router-dom';
-// import { useForm } from "react-hook-form";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useForm } from "react-hook-form";
+import Product from '../Product/Product';
 
-
-// const Checkout = () => {
-//     const { register, handleSubmit, watch, errors,name } = useForm();
-//     const { _id } = useParams();
-//     const [product, setProducts] = useState([]);
-// const items =product.find( td => td._id==_id)
-//     console.log(items)
-//     useEffect(() => {
-//         fetch(' https://rhubarb-surprise-12760.herokuapp.com/products')
-//         .then(res => res.json())
-//         .then(data => setProducts(data))
-//     }, [])
-
-//     const onSubmit = data => {
-//         const ordered = {
-//             name: data.name,
-//             price:data.price,
-//             weight:data.weight
-          
-//         };
-//     }
-   
-//     return (
-//         <div>
-        
-//             <h1>Confirm your order</h1>
-//             <form onSubmit={handleSubmit(onSubmit)}></form>
-            
-//             <img style={{ height: '300px' }} src={product.imageURL} alt="" />
-//             <h1>{name}</h1>
-//             <form action="/checkout" class="inline">
-//                         <button className="main-button float-left submit-button"
-//                             onClick={() =>onSubmit( product)}
-//                         >Place Order</button>
-//                     </form>
-
-
-//         </div>
-//     );
-
-
-
-
-// };
-
-// export default Checkout;
-
-import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useContext } from 'react';
 import { UserContext } from '../../App';
+import { Link } from '@material-ui/core';
 
 const Checkout = () => {
-  const { _id } = useParams();
-    const [ordered, setOrdered] = useState([]);
-    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+
+    const { _id } = useParams();
+    // const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 
     useEffect(() => {
-        fetch(` https://rhubarb-surprise-12760.herokuapp.com/${_id}=`+loggedInUser.email, {
-            method: 'GET',
-            headers: { 
-                'Content-Type': 'application/json',
-                // authorization: `Bearer ${sessionStorage.getItem('token')}`
-            }
-        })
-        .then(res => res.json())
-        .then(data => setOrdered(data));
-    }, [])
-    const {name,price} =ordered;
-    const user ={
-      productName :name,
-      productPrice:price
-    }
+        fetch('https://rhubarb-surprise-12760.herokuapp.com/product/' + _id)
+            .then(res => res.json())
+            .then(data => console.log(data))
+    }, [_id])
 
+    const [product, setProduct] = useState([]);
+    const items = product.find(pd => pd._id == _id)
+     console.log(items)
+    const onSubmit = data => {
+
+        //     const order= { ...loggedInUser,...setLoggedInUser };
+
+        //         fetch(' https://rhubarb-surprise-12760.herokuapp.com/addOrder', {
+        //             method: 'POST',
+        //             headers: {'Content-Type': 'application/json'
+        //             },
+        //             body: JSON.stringify(order)
+        //         })
+        //             .then(res => res.json())
+        //             .then(data =>  setProduct(data))
+
+        // },[]);
+    }
     return (
         <div>
-            <h3>You have: {ordered.length}1 ordered product</h3>
-                       {
-                ordered.map(item => <li key={item._id}>{item.name}</li>)
-            }
+            <div>
+                <h1>CheckOut</h1>
+                {/* <h1>{items.name}</h1> */}
+                <Checkout showAdded={false} product={product}></Checkout>
+                <p>Your added product <Link to="/product"></Link></p>
+                <form action="/checkout" class="inline">
+                    <button className="main-button float-left submit-button"
+                        onClick={() => onSubmit(product)}
+                    >Place Order</button>
+                </form>
+            </div>
         </div>
     );
 };
 
 export default Checkout;
-// from: {(new Date(item.checkIn).toDateString('dd/MM/yyyy'))} to: {(new Date(item.checkOut).toDateString('dd/MM/yyyy'))}

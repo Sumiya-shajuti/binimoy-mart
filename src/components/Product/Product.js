@@ -14,11 +14,11 @@ const Product = (props) => {
             <h4 className="product-name">{name}</h4>
             <div className="button">
                 <h3>{price}</h3>
-                <Link to={`/product/${_id}`}>
+                <Link to={`/test/${_id}`}>
                     <button>Buy Now</button>
 
 
-                                                </Link>
+                </Link>
 
             </div>
         </div>
@@ -27,4 +27,4 @@ const Product = (props) => {
 
 export default Product;
 
-{/* <Link to={"/product/" + _id}>{name}</Link> */}
+{/* <Link to={"/product/" + _id}>{name}</Link> */ }

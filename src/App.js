@@ -49,8 +49,8 @@ function App() {
                 <Admin></Admin>
               </Route>
 
-              <Route path="/product/:_id">
-                <Orders />
+              <Route path="/test/:_id">
+                <Checkout/>
               </Route>
 
               <Route path="/deals">
@@ -58,7 +58,7 @@ function App() {
               </Route>
 
               <Route path="/checkout">
-                <Checkout />
+                <Orders />
               </Route>
 
               <Route path="/home">
