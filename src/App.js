@@ -10,7 +10,6 @@ import {
   Link
 } from "react-router-dom";
 import PrivateRoute from './components/PrivateRoute/PrivateRoute'
-import LoginManager from './components/LoginManager/LoginManager'
 import Header from './components/Header/Header'
 import Deals from './components/Deals/Deals.js'
 import NotFound from './components/NotFound/NotFound'
@@ -39,11 +38,6 @@ function App() {
                 <AddProducts />
               </Route>
 
-              {/* <Route path="/orders/:product_id"> */}
-              <Route path="/checkout/:_id">
-                <Orders />
-              </Route>
-
               <Route path="/manager">
                 <Manager />
               </Route>
@@ -53,6 +47,10 @@ function App() {
               </Route>
               <Route path="/admin">
                 <Admin></Admin>
+              </Route>
+
+              <Route path="/product/:_id">
+                <Orders />
               </Route>
 
               <Route path="/deals">

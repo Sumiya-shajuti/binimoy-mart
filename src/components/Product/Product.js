@@ -11,13 +11,14 @@ const Product = (props) => {
         <div className="product">
             <img style={{ height: '300px' }} src={imageURL} alt="" />
             {/* <h3>{name}</h3> */}
-            <h4 className="product-name"><Link to={"/product/" + _id}>{name}</Link></h4>
+            <h4 className="product-name">{name}</h4>
             <div className="button">
                 <h3>{price}</h3>
-                <Link to={`/checkout/${_id}`}>
+                <Link to={`/product/${_id}`}>
                     <button>Buy Now</button>
 
-                </Link>
+
+                                                </Link>
 
             </div>
         </div>
@@ -25,3 +26,5 @@ const Product = (props) => {
 };
 
 export default Product;
+
+{/* <Link to={"/product/" + _id}>{name}</Link> */}

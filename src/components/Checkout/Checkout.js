@@ -11,7 +11,7 @@
 // const items =product.find( td => td._id==_id)
 //     console.log(items)
 //     useEffect(() => {
-//         fetch('http://localhost:5055/products')
+//         fetch(' https://rhubarb-surprise-12760.herokuapp.com/products')
 //         .then(res => res.json())
 //         .then(data => setProducts(data))
 //     }, [])
@@ -60,11 +60,11 @@ const Checkout = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 
     useEffect(() => {
-        fetch(`http://localhost:5050/products/${_id}=`+loggedInUser.email, {
+        fetch(` https://rhubarb-surprise-12760.herokuapp.com/${_id}=`+loggedInUser.email, {
             method: 'GET',
             headers: { 
                 'Content-Type': 'application/json',
-                authorization: `Bearer ${sessionStorage.getItem('token')}`
+                // authorization: `Bearer ${sessionStorage.getItem('token')}`
             }
         })
         .then(res => res.json())
@@ -80,10 +80,11 @@ const Checkout = () => {
         <div>
             <h3>You have: {ordered.length}1 ordered product</h3>
                        {
-                ordered.map(item => <li key={item._id}>{item.name} from: {(new Date(item.checkIn).toDateString('dd/MM/yyyy'))} to: {(new Date(item.checkOut).toDateString('dd/MM/yyyy'))}</li>)
+                ordered.map(item => <li key={item._id}>{item.name}</li>)
             }
         </div>
     );
 };
 
 export default Checkout;
+// from: {(new Date(item.checkIn).toDateString('dd/MM/yyyy'))} to: {(new Date(item.checkOut).toDateString('dd/MM/yyyy'))}

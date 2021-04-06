@@ -7,7 +7,7 @@ const Home = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5055/products')
+        fetch(' https://rhubarb-surprise-12760.herokuapp.com/products')
         .then(res => res.json())
         .then(data => setProducts(data))
     }, [])
@@ -20,6 +20,5 @@ const Home = () => {
         </div>
     );
 };
-// products.map(product =><Product key={product} product={product}></Product>)
 
 export default Home;

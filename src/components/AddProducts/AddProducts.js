@@ -18,7 +18,7 @@ const AddProducts = () => {
             weight:data.weight,
             imageURL: imageURL
         };
-        const url = `http://localhost:5055/addProduct`;
+        const url = ` https://rhubarb-surprise-12760.herokuapp.com/addProduct`;
 
         console.log(productData);
         fetch(url, {
@@ -55,7 +55,7 @@ const AddProducts = () => {
         <div>
             {/*  Side navigation  */}
             <div class="sidenav">
-                <a href="#">Add Product</a>
+                <a href="./addProducts">Add Product</a>
                 <br />
                 <a href="./manager">Manage History</a>
                 <br />

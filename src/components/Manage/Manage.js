@@ -1,41 +1,26 @@
-import React from 'react';
+import { Link } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
 import {Table,thead,tbody,td,tr} from 'react-bootstrap';
+// import Product from '../Product/Product';
+import ManageProducts from '../ManageProducts/ManageProducts'
 
 
 const Manage = () => {
-    return (
-        
-            <Table striped bordered hover variant="dark">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Username</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td colSpan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</Table>
 
-      
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        fetch(' https://rhubarb-surprise-12760.herokuapp.com/products')
+        .then(res => res.json())
+        .then(data => setProducts(data))
+    }, [])
+
+    return (
+        <div className="row-3">
+            {
+                products.map(product =>< ManageProducts key={product} product={product}></ ManageProducts>)
+            }
+        </div>
     );
 };
 
