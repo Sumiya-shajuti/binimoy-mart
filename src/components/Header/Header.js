@@ -11,21 +11,15 @@ const Header = () => {
 
         <div className="header">
             <div>
-                {/* <img style={{ height: '100px' }} src={logo} alt="" /> */}
+                <img style={{ height: '100px' }} src={logo} alt="" />
             </div>
             <nav>
 
                 <Link to="/home">Home</Link>
-                <a href="/checkOut">Orders</a>
-                <a href="/login">Login</a>
-                <a href="/deals">Deals</a>
-                <a href="/addProducts">Admin</a>
-               
-                 {/* <Form inline>
-                    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                     <Button variant="outline-danger">Search</Button>
-               </Form> */}
-      
+                <Link to="/checkOut">Order</Link>
+                <Link to="/login">Login</Link>
+                <Link to="/deals">Deals</Link>
+                <Link to="/addProducts">Admin</Link>
 
             </nav>
         </div>

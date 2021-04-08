@@ -15,7 +15,7 @@ import Deals from './components/Deals/Deals.js'
 import NotFound from './components/NotFound/NotFound'
 import Login from './components/Login/Login'
 import AddProducts from './components/AddProducts/AddProducts'
-import Orders from './components/Order/Order'
+import Order from './components/Order/Order'
 import CheckOut from  './components/CheckOut/CheckOut'
 
 export const UserContext = createContext();
@@ -23,7 +23,7 @@ function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
   return (
     <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
-      <h1>{loggedInUser.name}</h1>
+      <h1>{loggedInUser.email}</h1>
       <div>
         <div className="Header">
 
@@ -58,7 +58,7 @@ function App() {
               </Route>
 
               <Route path="/checkOut">
-                <Orders />
+                <Order />
               </Route>
 
               <Route path="/home">

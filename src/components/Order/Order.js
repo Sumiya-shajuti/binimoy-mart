@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { UserContext } from '../../App';
 import Grid from '@material-ui/core/Grid';
@@ -11,14 +11,25 @@ import {
 import Ordered from '../Ordered/Ordered';
 
 const Order = () => {
-    // const { } = useParams();
+
+    const { _id } = useParams();
+    const [product, setProduct] = useState([]);
+    const items = product.find(pd => pd._id == _id)
+    console.log(items)
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const [selectedDate, setSelectedDate] = useState({
         checkIn: new Date(),
         checkOut: new Date()
     });
+    useEffect(() => {
+        fetch('https://rhubarb-surprise-12760.herokuapp.com/products/')
+            .then(res => res.json())
+            .then(data =>
+                setProduct(data));
 
-   
+    }, [_id])
+
+
     const handleCheckOutDate = (date) => {
         const newDates = { ...selectedDate }
         newDates.checkOut = date;
@@ -26,7 +37,11 @@ const Order = () => {
     };
 
     const handleOrder = () => {
-        const newOrder = { ...loggedInUser, ...selectedDate };
+        const newOrder = { ...loggedInUser, ...product };
+        newOrder.orderTime = new Date().toString()
+        setProduct(newOrder)
+
+        console.log(newOrder);
         fetch('https://rhubarb-surprise-12760.herokuapp.com/addOrder', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -56,7 +71,8 @@ const Order = () => {
                         }}
                     />
                 </Grid>
-                <Button onClick={handleOrder} variant="contained" color="primary">Confirm Order</Button>
+                <h3> Product:{items?.name}</h3>
+                <Button onClick={handleOrder} variant="contained" color="primary">Your Ordered Product</Button>
             </MuiPickersUtilsProvider>
             <Ordered></Ordered>
         </div>

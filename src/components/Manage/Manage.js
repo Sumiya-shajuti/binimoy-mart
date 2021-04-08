@@ -1,6 +1,5 @@
 import { Link } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import {Table,thead,tbody,td,tr} from 'react-bootstrap';
 // import Product from '../Product/Product';
 import ManageProducts from '../ManageProducts/ManageProducts'
 

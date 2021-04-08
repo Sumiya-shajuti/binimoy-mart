@@ -8,8 +8,8 @@ const Product = (props) => {
 
     return (
         <div className="product">
+
             <img style={{ height: '300px' }} src={imageURL} alt="" />
-            {/* <h3>{name}</h3> */}
             <h4 className="product-name">{name}</h4>
             <div className="button">
                 <h3>{price}</h3>
@@ -18,9 +18,9 @@ const Product = (props) => {
 
 
                 </Link>
-
             </div>
         </div>
+
     );
 };
 
