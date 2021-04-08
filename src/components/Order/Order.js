@@ -1,95 +1,69 @@
-
-// import React, { useEffect, useState } from 'react';
-// import { useParams } from 'react-router-dom';
-// import { useForm } from "react-hook-form";
-
-
-// const Checkout = () => {
-//     const { register, handleSubmit, watch, errors,name } = useForm();
-//     const { _id } = useParams();
-//     const [product, setProducts] = useState([]);
-// const items =product.find( td => td._id==_id)
-//     console.log(items)
-//     useEffect(() => {
-//         fetch(' https://rhubarb-surprise-12760.herokuapp.com/products')
-//         .then(res => res.json())
-//         .then(data => setProducts(data))
-//     }, [])
-
-//     const onSubmit = data => {
-//         const ordered = {
-//             name: data.name,
-//             price:data.price,
-//             weight:data.weight
-          
-//         };
-//     }
-   
-//     return (
-//         <div>
-        
-//             <h1>Confirm your order</h1>
-//             <form onSubmit={handleSubmit(onSubmit)}></form>
-            
-//             <img style={{ height: '300px' }} src={product.imageURL} alt="" />
-//             <h1>{name}</h1>
-//             <form action="/checkout" class="inline">
-//                         <button className="main-button float-left submit-button"
-//                             onClick={() =>onSubmit( product)}
-//                         >Place Order</button>
-//                     </form>
-
-
-//         </div>
-//     );
-
-
-
-
-// };
-
-// export default Checkout;
-
-import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import React, { useContext, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { UserContext } from '../../App';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+    MuiPickersUtilsProvider,
+    KeyboardDatePicker,
+} from '@material-ui/pickers';
+import Ordered from '../Ordered/Ordered';
 
 const Order = () => {
-  const { _id } = useParams();
-    const [ordered, setOrdered] = useState([]);
+    // const { } = useParams();
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    const [selectedDate, setSelectedDate] = useState({
+        checkIn: new Date(),
+        checkOut: new Date()
+    });
 
-    useEffect(() => {
-        fetch(` https://rhubarb-surprise-12760.herokuapp.com/${_id}=`+loggedInUser.email, {
-            method: 'GET',
-            headers: { 
-                'Content-Type': 'application/json',
-                authorization: `Bearer ${sessionStorage.getItem('token')}`
-            }
+   
+    const handleCheckOutDate = (date) => {
+        const newDates = { ...selectedDate }
+        newDates.checkOut = date;
+        setSelectedDate(newDates);
+    };
+
+    const handleOrder = () => {
+        const newOrder = { ...loggedInUser, ...selectedDate };
+        fetch('https://rhubarb-surprise-12760.herokuapp.com/addOrder', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newOrder)
         })
-        .then(res => res.json())
-        .then(data => setOrdered(data));
-    }, [])
-    const {name,price} =ordered;
-    const user ={
-      productName :name,
-      productPrice:price
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+            })
     }
 
     return (
-        <div>
-            <h3>You have: {ordered.length}1 ordered product</h3>
-                       {
-                ordered.map(item => <li key={item._id}>{item.name}</li>)
-            }
+        <div style={{ textAlign: 'center' }}>
+            <h1>Hello, {loggedInUser.name}! </h1>
+
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <Grid container justify="space-around">
+                    <KeyboardDatePicker
+                        margin="normal"
+                        id="date-picker-dialog"
+                        label="Order Date"
+                        format="dd/MM/yyyy"
+                        value={selectedDate.checkOut}
+                        onChange={handleCheckOutDate}
+                        KeyboardButtonProps={{
+                            'aria-label': 'change date',
+                        }}
+                    />
+                </Grid>
+                <Button onClick={handleOrder} variant="contained" color="primary">Confirm Order</Button>
+            </MuiPickersUtilsProvider>
+            <Ordered></Ordered>
         </div>
     );
 };
 
 export default Order;
-// from: {(new Date(item.checkIn).toDateString('dd/MM/yyyy'))} to: {(new Date(item.checkOut).toDateString('dd/MM/yyyy'))}
-
-
 
 
 

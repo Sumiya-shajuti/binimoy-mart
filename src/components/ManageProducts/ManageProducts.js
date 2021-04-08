@@ -1,21 +1,25 @@
 import { Table } from '@material-ui/core';
 import React from 'react';
 
-const ManageProducts = (props) => {
+const ManageProducts = ({product}) => {
 
 
 
-      const { name, price, _id } = props.product;
+      // const { name, price, _id } = props.product;
+      const deleteProduct = id => {
+
+      }
 
       return (
             <div className="row">
-                  <div className=" col-md-7">
+                  <div >
                         {/* <h3>{_id}</h3> */}
-                        <h4> {name}</h4>
+                        <h4> {product.name}</h4>
                   </div>
-                  <div className=" col-md-5">
-                        <h3>{price}</h3>
-                        <button onClick="deleteProduct(${_id})">delete</button>
+                  <div >
+                        <h3>{product.price}</h3>
+                        <button onClick={() => deleteProduct(product._id)}>Delete</button>
+                       
                   </div>
 
             </div>

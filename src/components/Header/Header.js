@@ -16,7 +16,7 @@ const Header = () => {
             <nav>
 
                 <Link to="/home">Home</Link>
-                <a href="/checkout">Orders</a>
+                <a href="/checkOut">Orders</a>
                 <a href="/login">Login</a>
                 <a href="/deals">Deals</a>
                 <a href="/addProducts">Admin</a>

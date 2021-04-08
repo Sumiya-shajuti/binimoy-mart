@@ -2,20 +2,17 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import './AddProducts.css'
-import Manage  from'../Manage/Manage'
+import Manage from '../Manage/Manage'
 
 const AddProducts = () => {
-
-
     const { register, handleSubmit, watch, errors } = useForm();
     const [imageURL, setIMageURL] = useState(null);
-
 
     const onSubmit = data => {
         const productData = {
             name: data.name,
-            price:data.price,
-            weight:data.weight,
+            price: data.price,
+            weight: data.weight,
             imageURL: imageURL
         };
         const url = ` https://rhubarb-surprise-12760.herokuapp.com/addProduct`;
@@ -39,7 +36,6 @@ const AddProducts = () => {
         imageData.append('image', event.target.files[0]);
 
 
-
         axios.post('https://api.imgbb.com/1/upload',
             imageData)
             .then(function (response) {
@@ -55,6 +51,7 @@ const AddProducts = () => {
         <div>
             {/*  Side navigation  */}
             <div class="sidenav">
+                <h2 className="brand">BINIMOY MART</h2>
                 <a href="./addProducts">Add Product</a>
                 <br />
                 <a href="./manager">Manage History</a>
@@ -66,17 +63,21 @@ const AddProducts = () => {
 
 
             <div class="main">
-                <h5>Add any Product  here</h5>
-                <form onSubmit={handleSubmit(onSubmit)}>
 
-                    <input name="name" defaultValue="New Product" ref={register} />
+                <h5>Add Product</h5>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    {/* <h6>New Product</h6> */}
+                    <input name="name" defaultValue="Add new product" ref={register} />
                     <br />
+                    {/* <h6>Add Price</h6> */}
                     <input name="price" defaultValue="Price" ref={register} />
                     <br />
+                    {/* <h6>Weight</h6> */}
                     <input name="weight" defaultValue="Weight" ref={register} />
                     <br />
+                    {/* <h6>Add Photo</h6> */}
                     <input name="exampleRequired" type="file" onChange={handleImageUpload} />
-                    <br />
+
                     <input type="submit" /></form>
             </div>
         </div>

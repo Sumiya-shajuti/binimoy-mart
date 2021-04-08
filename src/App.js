@@ -16,7 +16,7 @@ import NotFound from './components/NotFound/NotFound'
 import Login from './components/Login/Login'
 import AddProducts from './components/AddProducts/AddProducts'
 import Orders from './components/Order/Order'
-import Checkout from './components/Checkout/Checkout';
+import CheckOut from  './components/CheckOut/CheckOut'
 
 export const UserContext = createContext();
 function App() {
@@ -45,19 +45,19 @@ function App() {
 
                 <Login></Login>
               </Route>
-              <Route path="/admin">
+              <PrivateRoute path="/admin">
                 <Admin></Admin>
-              </Route>
+              </PrivateRoute>
 
-              <Route path="/test/:_id">
-                <Checkout/>
-              </Route>
+              <PrivateRoute path="/product/:_id">
+                <CheckOut/>
+              </PrivateRoute>
 
               <Route path="/deals">
                 <Deals />
               </Route>
 
-              <Route path="/checkout">
+              <Route path="/checkOut">
                 <Orders />
               </Route>
 
