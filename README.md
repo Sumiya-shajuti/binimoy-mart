@@ -8,7 +8,7 @@ Where customer get their daily grocery products. .
 
     Features
 
-Select order from the products
+Select products from the shop
 
 Sign Up to place order
 
